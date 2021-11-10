@@ -35,10 +35,13 @@ public class FacturaService implements IFacturaService{
         if(factura != null){
             facturaRepository.save(factura);
         }
+
         factura.setMecanico(mecanicoRepository.getById(factura.getMecanico().getId()));
         factura.setCliente(clienteRepository.getById(factura.getCliente().getId()));
         factura.setServicio(servicioRepository.getById(factura.getServicio().getId()));
         factura.setRepuesto(repuestoRepository.getById(factura.getRepuesto().getId()));
+
+
         return factura;
     }
 
@@ -58,15 +61,6 @@ public class FacturaService implements IFacturaService{
             return facturaRepository.save(factura);
         } else {
             throw new ResourceNotFoundException("Factura no encontrada");
-        }
-    }
-
-    @Override
-    public List<Factura> traerFacturasPorEstado(Boolean estado) throws BadRequestException {
-        if(mecanicoRepository.findByEstado(estado).size()!=0){
-            return facturaRepository.getFacturaPorEstado(estado);}
-        else{
-            throw new BadRequestException("No existe el mecánico " + estado);
         }
     }
 

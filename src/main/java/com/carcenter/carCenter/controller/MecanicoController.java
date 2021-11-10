@@ -1,6 +1,7 @@
 package com.carcenter.carCenter.controller;
 
 import com.carcenter.carCenter.exception.BadRequestException;
+import com.carcenter.carCenter.exception.ResourceNotFoundException;
 import com.carcenter.carCenter.model.Mecanico;
 import com.carcenter.carCenter.service.MecanicoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class MecanicoController {
     public ResponseEntity<Mecanico> buscarMecanico(@PathVariable Long id)  {
         Mecanico mecanico = mecanicoService.buscarMecanico(id).orElse(null);
         return ResponseEntity.ok(mecanico);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMecanicos(@PathVariable long id) throws ResourceNotFoundException
+    {
+        mecanicoService.eliminarMecanico(id);
+        return ResponseEntity.status(HttpStatus.OK).body("eliminado");
     }
 
     @ExceptionHandler({BadRequestException.class})

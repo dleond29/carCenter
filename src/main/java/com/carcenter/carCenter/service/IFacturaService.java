@@ -17,7 +17,5 @@ public interface IFacturaService {
 
     Factura editarFactura(Factura factura) throws ResourceNotFoundException;
 
-    List<Factura> traerFacturasPorEstado(Boolean estado) throws BadRequestException;
-
     void eliminarFactura(Long id) throws ResourceNotFoundException;
 }

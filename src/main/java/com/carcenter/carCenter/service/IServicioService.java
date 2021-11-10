@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IServicioService {
 
-    Servicio agregarServicio(Servicio servicio);
+    Servicio agregarServicio(Servicio servicio) throws ResourceNotFoundException;
 
     List<Servicio> traerServicios();
 

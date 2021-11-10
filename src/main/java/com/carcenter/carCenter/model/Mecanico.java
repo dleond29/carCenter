@@ -25,9 +25,9 @@ public class Mecanico {
     private Integer numeroCelular;
     private String direccion;
     private String correoElectronico;
-    private Boolean estado;
+    private String estado;
 
-    @OneToMany(mappedBy = "mecanico")
+    @OneToMany(mappedBy = "mecanico", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Factura> facturaSet;
 

@@ -11,17 +11,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
 public class ServicioService implements IServicioService {
+
+    static final Integer VALORMINIMO_MANODEOBRA = 50000;
+    static final Integer VALORMAXIMO_MANODEOBRA = 300000;
 
     @Autowired
     IServicioRepository servicioRepository;
 
     @Override
-    public Servicio agregarServicio(Servicio servicio) {
+    public Servicio agregarServicio(Servicio servicio)throws ResourceNotFoundException {
+        if (servicio.getManoDeObra() >= VALORMINIMO_MANODEOBRA && servicio.getManoDeObra() <= VALORMAXIMO_MANODEOBRA) {
+            servicioRepository.save(servicio);
+            return servicio;
+        }else{
+            throw new ResourceNotFoundException("El servicio con id " + servicio.getId() + " excede el rango de precio para mano de obra");
+        }
 
-        servicioRepository.save(servicio);
-        return servicio;
     }
 
     @Override

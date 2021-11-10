@@ -1,6 +1,7 @@
 package com.carcenter.carCenter.controller;
 
 import com.carcenter.carCenter.exception.BadRequestException;
+import com.carcenter.carCenter.exception.ResourceNotFoundException;
 import com.carcenter.carCenter.model.Repuesto;
 import com.carcenter.carCenter.service.RepuestoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public class RepuestoController {
     public ResponseEntity<Repuesto> buscarRepuesto(@PathVariable Long id)  {
         Repuesto repuesto = repuestoService.buscarRepuesto(id).orElse(null);
         return ResponseEntity.ok(repuesto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteRepuestos(@PathVariable long id) throws ResourceNotFoundException
+    {
+        repuestoService.eliminarRepuesto(id);
+        return ResponseEntity.status(HttpStatus.OK).body("eliminado");
     }
 
     @ExceptionHandler({BadRequestException.class})

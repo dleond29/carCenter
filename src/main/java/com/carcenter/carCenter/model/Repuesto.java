@@ -21,7 +21,7 @@ public class Repuesto {
     private Integer numeroDeUnidades;
     private Integer descuento;
 
-    @OneToMany(mappedBy = "repuesto")
+    @OneToMany(mappedBy = "repuesto", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Factura> facturaSet;
 }

@@ -18,9 +18,10 @@ public class Servicio {
     private Long id;
     private String nombreServicio;
     private Integer manoDeObra;
-    private Integer descuento;
+    private Double descuento;
 
-    @OneToMany(mappedBy = "servicio")
+    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore //sino entra en un ciclo infinito
     private Set<Factura> facturaSet;
+
 }

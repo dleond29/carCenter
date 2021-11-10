@@ -25,8 +25,10 @@ public class Cliente {
     private Integer numeroCelular;
     private String direccion;
     private String correoElectronico;
+    private Integer presupuestoLimite;
 
-    @OneToMany(mappedBy = "cliente")
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Factura> facturaSet;
 }

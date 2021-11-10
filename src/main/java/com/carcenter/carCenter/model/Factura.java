@@ -3,18 +3,19 @@ package com.carcenter.carCenter.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Factura")
+@Table(name="Facturas")
 @Setter
 @Getter
 public class Factura {
+    @Id
+    @SequenceGenerator(name = "factura_sequence", sequenceName = "factura_sequence", allocationSize = 1,initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura_sequence")
     private Long id;
-    private Integer totalFactura;
+    private Double totalFactura;
+
 
     @ManyToOne
     @JoinColumn(name="cliente_id", nullable = false)
