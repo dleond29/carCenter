@@ -1,9 +1,11 @@
 package com.carcenter.carCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="Facturas")
@@ -15,6 +17,7 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura_sequence")
     private Long id;
     private Double totalFactura;
+    private Double costoLimite;
 
 
     @ManyToOne
@@ -24,10 +27,6 @@ public class Factura {
     @ManyToOne
     @JoinColumn(name="mecanico_id", nullable = false)
     private Mecanico mecanico;
-
-    @ManyToOne
-    @JoinColumn(name="repuesto_id", nullable = false)
-    private Repuesto repuesto;
 
     @ManyToOne
     @JoinColumn(name="servicio_id", nullable = false)

@@ -29,18 +29,19 @@ public class FacturaService implements IFacturaService{
         if(mecanicoRepository.findById(factura.getMecanico().getId()).isEmpty() || clienteRepository.findById(factura.getCliente().getId()).isEmpty()){
             throw new BadRequestException("El mecánico o el cliente no existen");
         }
-        if(repuestoRepository.findById(factura.getRepuesto().getId()).isEmpty() || servicioRepository.findById(factura.getServicio().getId()).isEmpty()){
-            throw new BadRequestException("El servicio o el repuesto no existen");
-        }
         if(factura != null){
             facturaRepository.save(factura);
         }
 
         factura.setMecanico(mecanicoRepository.getById(factura.getMecanico().getId()));
         factura.setCliente(clienteRepository.getById(factura.getCliente().getId()));
-        factura.setServicio(servicioRepository.getById(factura.getServicio().getId()));
-        factura.setRepuesto(repuestoRepository.getById(factura.getRepuesto().getId()));
 
+
+        factura.setTotalFactura(factura.getServicio().getRepuesto().getPrecioPorUnidad()*factura.getServicio().getRepuesto().getNumeroDeUnidades());;
+
+        if(factura.getTotalFactura()>factura.getCostoLimite()){
+
+        }
 
         return factura;
     }

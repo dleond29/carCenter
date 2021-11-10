@@ -17,11 +17,7 @@ public class Repuesto {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "repuesto_sequence")
     private Long id;
     private String nombreRepuesto;
-    private Integer precioPorUnidad;
+    private Double precioPorUnidad;
     private Integer numeroDeUnidades;
-    private Integer descuento;
 
-    @OneToMany(mappedBy = "repuesto", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Factura> facturaSet;
 }

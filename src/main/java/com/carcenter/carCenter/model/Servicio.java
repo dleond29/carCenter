@@ -17,8 +17,13 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "servicio_sequence")
     private Long id;
     private String nombreServicio;
-    private Integer manoDeObra;
+    private Double manoDeObra;
     private Double descuento;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "repuesto_id", referencedColumnName = "id")
+    private Repuesto repuesto;
+
 
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore //sino entra en un ciclo infinito
