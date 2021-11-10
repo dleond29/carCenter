@@ -37,11 +37,12 @@ public class FacturaService implements IFacturaService{
         factura.setCliente(clienteRepository.getById(factura.getCliente().getId()));
 
 
-        factura.setTotalFactura(factura.getServicio().getRepuesto().getPrecioPorUnidad()*factura.getServicio().getRepuesto().getNumeroDeUnidades());;
 
-        if(factura.getTotalFactura()>factura.getCostoLimite()){
 
+        if(factura.getTotalFactura()<=factura.getCostoLimite()){
+            factura.setTotalFactura((factura.getServicio().getRepuesto().getPrecioPorUnidad()*factura.getServicio().getRepuesto().getNumeroDeUnidades()+factura.getServicio().getManoDeObra())*1.19);
         }
+
 
         return factura;
     }
